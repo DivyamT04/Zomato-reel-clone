@@ -19,7 +19,10 @@ async function createFood(req, res) {
     foodPartner: req.foodPartner._id,
   });
 
-  res.send("Food item created.");
+  res.status(201).json({
+    message: "Food item created successfully",
+    food: foodItem,
+  });
 }
 
 module.exports = { createFood };

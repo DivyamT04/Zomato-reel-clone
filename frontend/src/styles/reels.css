@@ -1,0 +1,107 @@
+@import "./vars.css";
+
+/* Full-screen vertical reels with snapping */
+.reels {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  background: var(--bg);
+}
+
+.reel {
+  position: relative;
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.reel video,
+.reel .video-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* subtle bottom gradient to improve contrast for overlays */
+.reel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 35%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Top overlay containing description and button */
+.overlay {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.desc {
+  max-width: 75%;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.15;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.overlay .btn {
+  display: inline-block;
+  width: auto;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* small play indicator in center for placeholders */
+.video-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+@media (max-width: 520px) {
+  .desc {
+    max-width: 90%;
+    font-size: 0.95rem;
+  }
+  .overlay {
+    top: 0.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+}

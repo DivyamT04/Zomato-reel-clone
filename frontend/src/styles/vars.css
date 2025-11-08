@@ -1,0 +1,26 @@
+/* Centralized theme variables (light + dark) */
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #0f1724;
+  --muted: #4b5563;
+  --accent: #ff4d4f; /* subtle Zomato-like red */
+  --accent-foreground: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: rgba(15, 23, 36, 0.08);
+  --shadow: rgba(2, 6, 23, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #071018;
+    --surface: #071627;
+    --text: #e6eef6;
+    --muted: #9fb0c3;
+    --accent: #ff6b6b;
+    --accent-foreground: #071018;
+    --input-bg: #042233;
+    --input-border: rgba(255, 255, 255, 0.06);
+    --shadow: rgba(0, 0, 0, 0.6);
+  }
+}

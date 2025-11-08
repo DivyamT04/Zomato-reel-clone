@@ -1,12 +1,9 @@
+const { get } = require("mongoose");
 const foodModel = require("../models/food.model");
 const storageService = require("../services/storage.service.js");
 const { v4: uuid } = require("uuid");
 
 async function createFood(req, res) {
-  console.log(req.foodPartner);
-  console.log(req.body);
-  console.log(req.file);
-
   const fileUploadResult = await storageService.uploadFile(
     req.file.buffer,
     uuid()
@@ -25,4 +22,12 @@ async function createFood(req, res) {
   });
 }
 
-module.exports = { createFood };
+async function getFoodItems(req, res) {
+  const foodItems = await foodModel.find({});
+  res.status(200).json({
+    message: "Food items fetched successfully",
+    food: foodItems,
+  });
+}
+
+module.exports = { createFood, getFoodItems };

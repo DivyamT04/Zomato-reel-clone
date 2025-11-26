@@ -1,6 +1,7 @@
 const userModel = require("../models/user.model.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const foodPartnerModel = require("../models/foodpartner.model.js");
 
 async function registerUser(req, res) {
   const { fullName, email, password } = req.body;
@@ -88,7 +89,7 @@ async function logoutUser(req, res) {
 async function registerfoodPartner(req, res) {
   const { name, email, password, phone, address, ownerName } = req.body;
 
-  const isFoodPartnerAlreadyExists = await foodPartnerModel.finOne({
+  const isFoodPartnerAlreadyExists = await foodPartnerModel.findOne({
     email,
   });
 

@@ -5,6 +5,7 @@ const cors = require("cors");
 
 let authRoutes;
 let foodRoutes;
+let foodPartnerRoutes;
 try {
   authRoutes = require("./routes/auth.routes.js");
 } catch (err) {
@@ -54,6 +55,26 @@ if (
 } else {
   console.error(
     "Food routes not mounted: exported value is not a valid express router or middleware."
+  );
+}
+
+try {
+  foodPartnerRoutes = require("./routes/foodPartner.routes.js");
+} catch (err) {
+  console.error("Failed to load food partner routes:", err);
+  foodPartnerRoutes = null;
+}
+
+if (
+  foodPartnerRoutes &&
+  (typeof foodPartnerRoutes === "function" ||
+    (typeof foodPartnerRoutes === "object" &&
+      (foodPartnerRoutes.handle || foodPartnerRoutes.stack)))
+) {
+  app.use("/api/food-partner", foodPartnerRoutes);
+} else {
+  console.error(
+    "Food partner routes not mounted: exported value is not a valid express router or middleware."
   );
 }
 

@@ -5,10 +5,10 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 
 const UserRegister = () => {
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
-    const navigate = useNavigate();
     e.preventDefault();
-    const fullName = e.target.fullName;
+    const fullName = e.target.fullName.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -25,7 +25,6 @@ const UserRegister = () => {
     );
 
     console.log(response.data);
-    navigate("/");
   };
 
   return (
@@ -42,9 +41,19 @@ const UserRegister = () => {
         </div>
 
         <form className="form" onSubmit={handleSubmit}>
-          <input className="input" placeholder="Full name" />
-          <input className="input" placeholder="Email" type="email" />
-          <input className="input" placeholder="Password" type="password" />
+          <input className="input" name="fullName" placeholder="Full name" />
+          <input
+            className="input"
+            name="email"
+            placeholder="Email"
+            type="email"
+          />
+          <input
+            className="input"
+            name="password"
+            placeholder="Password"
+            type="password"
+          />
 
           <button className="btn" type="submit">
             Create account

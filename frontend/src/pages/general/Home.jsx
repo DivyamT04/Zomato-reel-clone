@@ -1,41 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "../../styles/reels.css";
+import ReelFeed from "../../components/ReelFeed.jsx";
 
-const items = [
-  {
-    id: 1,
-    title: "Delicious biryani at House of Spice - Order now!",
-    store: "House of Spice",
-  },
-  {
-    id: 2,
-    title: "Authentic sushi platter available today — limited stock",
-    store: "Sushi World",
-  },
-  {
-    id: 3,
-    title: "Street-style tacos with a twist. Try the new salsa!",
-    store: "Taco Town",
-  },
-];
+const Home = () => {
+  const [videos, setVideos] = useState([]);
+  // Autoplay behavior is handled inside ReelFeed
 
-const home = () => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/food", { withCredentials: true })
+      .then((response) => {
+        console.log(response.data);
+
+        setVideos(response.data.foodItems);
+      })
+      .catch(() => {
+        /* noop: optionally handle error */
+      });
+  }, []);
+
+  // Using local refs within ReelFeed; keeping map here for dependency parity if needed
+
+  async function likeVideo(item) {
+    const response = await axios.post(
+      "http://localhost:3000/api/food/like",
+      { foodId: item._id },
+      { withCredentials: true }
+    );
+
+    if (response.data.like) {
+      console.log("Video liked");
+      setVideos((prev) =>
+        prev.map((v) =>
+          v._id === item._id ? { ...v, likeCount: v.likeCount + 1 } : v
+        )
+      );
+    } else {
+      console.log("Video unliked");
+      setVideos((prev) =>
+        prev.map((v) =>
+          v._id === item._id ? { ...v, likeCount: v.likeCount - 1 } : v
+        )
+      );
+    }
+  }
+
+  async function saveVideo(item) {
+    const response = await axios.post(
+      "http://localhost:3000/api/food/save",
+      { foodId: item._id },
+      { withCredentials: true }
+    );
+
+    if (response.data.save) {
+      setVideos((prev) =>
+        prev.map((v) =>
+          v._id === item._id ? { ...v, savesCount: v.savesCount + 1 } : v
+        )
+      );
+    } else {
+      setVideos((prev) =>
+        prev.map((v) =>
+          v._id === item._id ? { ...v, savesCount: v.savesCount - 1 } : v
+        )
+      );
+    }
+  }
+
   return (
-    <div className="reels">
-      {items.map((item) => (
-        <section className="reel" key={item.id}>
-          <div className="video-placeholder">VIDEO {item.id}</div>
-
-          <div className="overlay">
-            <div className="desc">{item.title}</div>
-            <a className="btn" href="#">
-              Visit store — {item.store}
-            </a>
-          </div>
-        </section>
-      ))}
-    </div>
+    <ReelFeed
+      items={videos}
+      onLike={likeVideo}
+      onSave={saveVideo}
+      emptyMessage="No videos available."
+    />
   );
 };
 
-export default home;
+export default Home;

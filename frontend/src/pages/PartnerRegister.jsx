@@ -5,9 +5,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const PartnerRegister = () => {
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const navigate = useNavigate();
 
     const businessName = e.target.businessName.value;
     const ownerName = e.target.ownerName.value;
@@ -19,12 +19,12 @@ const PartnerRegister = () => {
     const response = await axios.post(
       "http://localhost:3000/api/auth/food-partner/register",
       {
-        businessName,
-        ownerName,
-        email,
-        password,
-        phoneNumber,
-        address,
+        name: businessName,
+        ownerName: ownerName,
+        email: email,
+        password: password,
+        phone: phoneNumber,
+        address: address,
       },
       { withCredentials: true }
     );

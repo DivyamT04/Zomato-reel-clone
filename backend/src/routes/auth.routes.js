@@ -9,8 +9,8 @@ router.post("/user/login", authController.loginUser);
 router.get("/user/logout", authController.logoutUser);
 
 // Food Partner APIS
-router.post("/foodpartner/register", authController.registerfoodPartner);
-router.post("/foodpartner/login", authController.loginfoodPartner);
-router.get("/foodpartner/logout", authController.logoutfoodPartner);
+router.post("/food-partner/register", authController.registerfoodPartner);
+router.post("/food-partner/login", authController.loginfoodPartner);
+router.get("/food-partner/logout", authController.logoutfoodPartner);
 
 module.exports = router;

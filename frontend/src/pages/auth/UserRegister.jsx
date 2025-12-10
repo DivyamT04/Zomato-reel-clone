@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/auth.css";
+import "../../styles/auth-shared.css";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 

@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/auth.css";
+import "../../styles/auth-shared.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const PartnerRegister = () => {
+const FoodPartnerRegister = () => {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,4 +75,4 @@ const PartnerRegister = () => {
   );
 };
 
-export default PartnerRegister;
+export default FoodPartnerRegister;

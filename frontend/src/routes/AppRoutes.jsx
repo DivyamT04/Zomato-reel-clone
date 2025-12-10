@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AuthLanding from "../pages/AuthLanding";
-import UserRegister from "../pages/UserRegister";
-import UserLogin from "../pages/UserLogin";
-import PartnerRegister from "../pages/PartnerRegister";
-import PartnerLogin from "../pages/PartnerLogin";
+import UserRegister from "../pages/auth/UserRegister";
+import ChooseRegister from "../pages/auth/AuthLanding";
+import UserLogin from "../pages/auth/UserLogin";
+import FoodPartnerRegister from "../pages/auth/FoodPartnerRegister";
+import FoodPartnerLogin from "../pages/auth/FoodPartnerLogin";
 import Home from "../pages/general/home";
 import Saved from "../pages/general/Saved";
 import BottomNav from "../components/BottomNav";
@@ -15,11 +15,23 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/register" element={<ChooseRegister />} />
         <Route path="/user/register" element={<UserRegister />} />
         <Route path="/user/login" element={<UserLogin />} />
-        <Route path="/food-partner/register" element={<PartnerRegister />} />
-        <Route path="/food-partner/login" element={<PartnerLogin />} />
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/food-partner/register"
+          element={<FoodPartnerRegister />}
+        />
+        <Route path="/food-partner/login" element={<FoodPartnerLogin />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Home />
+              <BottomNav />
+            </>
+          }
+        />
         <Route
           path="/saved"
           element={

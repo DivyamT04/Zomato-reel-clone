@@ -13,7 +13,7 @@ const FoodPartnerRegister = () => {
     const ownerName = e.target.ownerName.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const phoneNumber = e.target.phoneNumber.value;
+    const phoneNumber = e.target.phone.value;
     const address = e.target.address.value;
 
     const response = await axios.post(
@@ -48,13 +48,32 @@ const FoodPartnerRegister = () => {
         </div>
 
         <form className="form" onSubmit={handleSubmit}>
-          <input className="input" placeholder="Business name" />
-          <input className="input" placeholder="Owner name" />
-          <input className="input" placeholder="Email" type="email" />
-          <input className="input" placeholder="Password" type="password" />
-          <input className="input" placeholder="Phone number" type="tel" />
+          <input
+            className="input"
+            name="businessName"
+            placeholder="Business name"
+          />
+          <input className="input" name="ownerName" placeholder="Owner name" />
+          <input
+            className="input"
+            name="email"
+            placeholder="Email"
+            type="email"
+          />
+          <input
+            className="input"
+            name="password"
+            placeholder="Password"
+            type="password"
+          />
+          <input
+            className="input"
+            name="phone"
+            placeholder="Phone number"
+            type="tel"
+          />
 
-          <input className="input" placeholder="Address" />
+          <input className="input" name="address" placeholder="Address" />
 
           <button className="btn" type="submit">
             Create account

@@ -59,7 +59,7 @@ if (
 }
 
 try {
-  foodPartnerRoutes = require("./routes/foodPartner.routes.js");
+  foodPartnerRoutes = require("./routes/food-partner.routes.js");
 } catch (err) {
   console.error("Failed to load food partner routes:", err);
   foodPartnerRoutes = null;
